@@ -1,0 +1,29 @@
+﻿@model IEnumerable<IProductable>
+
+
+
+<table>
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Description</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody>
+       @foreach (var prod in Model)
+       {
+           <tr>
+               <td>@prod.Id</td>
+               <td>@prod.Name</td>
+               <td>@prod.Category</td>
+               <td>@prod.Description</td>
+               <td>@prod.Price</td>
+        
+        
+        </tr>
+       }
+    </tbody>
+</table>
