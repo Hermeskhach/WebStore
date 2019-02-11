@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using BisnessLayer;
+using BisnessLayer.BisnessModels;
+using BisnessLayer.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -23,6 +25,7 @@ namespace StoreWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<LayerConfig>();
+            services.AddTransient<IProductable, Product>();
             services.AddMvc();
         }
 

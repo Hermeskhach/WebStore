@@ -11,6 +11,9 @@ namespace StoreWeb.Controllers
 {
     public class ProductController : Controller
     {
+
+        private IEnumerable<IProductable> products;
+
         public IActionResult Index()
         {
             return View();
@@ -19,10 +22,31 @@ namespace StoreWeb.Controllers
        public IActionResult ListProducts()
         {
 
-            IEnumerable<IProductable> products = ProductVm.GetProducts();
+             products= ProductVm.GetProducts();
 
             return View(products);
         }
+
+        public IActionResult AddProduct()
+        {
+            return View(new Product());
+        }
+
+        [HttpPost]
+        public IActionResult AddProduct(Product product)
+        {
+            product.AddProduct();
+            return RedirectToAction("ListProducts");
+
+        }
+
+
+        public IActionResult EditProduct(int? productId)
+        {
+            IProductable prod = products.Where(p => p.Id == productId).FirstOrDefault();
+            return View(prod);
+        }
+
         
     }
 }

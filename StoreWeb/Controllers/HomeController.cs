@@ -11,7 +11,7 @@ namespace StoreWeb.Controllers
 {
     public class HomeController : Controller
     {
-        private LayerConfig config;
+        private readonly LayerConfig config;
         public HomeController(LayerConfig conf)
         {
             config = conf;

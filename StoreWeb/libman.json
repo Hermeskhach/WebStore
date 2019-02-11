@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "defaultProvider": "filesystem",
+  "libraries": [
+    {
+      "library": "node_modules/bootstrap/dist/css/",
+      "destination": "wwwroot/lib/CSS/css/"
+    },
+    {
+      "library": "node_modules/jquery/dist/",
+      "destination": "wwwroot/lib/jQuery/dist/"
+    }
+  ]
+}
