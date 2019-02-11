@@ -14,7 +14,7 @@ namespace DataAccessLayer.Extentions
             Type type = typeof(T);
             var accessor = TypeAccessor.Create(type);
             var members = accessor.GetMembers();
-            var t = new T();
+            var obj = new T();
 
             for (int i = 0; i < reader.FieldCount; i++)
             {
@@ -24,14 +24,12 @@ namespace DataAccessLayer.Extentions
 
                     if (members.Any(m => string.Equals(m.Name, colName, StringComparison.OrdinalIgnoreCase)))
                     {
-                        accessor[t, colName] = reader.GetValue(i);
+                        accessor[obj, colName] = reader.GetValue(i);
                     }
-
-
                 }
             }
 
-            return t;
+            return obj;
         }
 
 

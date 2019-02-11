@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Data.SqlClient;
 using DataAccessLayer.Extentions;
 using DataAccessLayer.DataAccessTools;
@@ -9,11 +7,11 @@ namespace DataAccessLayer
 {
     public class DataAccessManager
     {
-        public static IEnumerable<T> ExexuteSPWithResult<T>(string procedureName) where T : class, new()
+        internal protected static IEnumerable<T> ExexuteSPWithResult<T>(string procedureName) where T : class, new()
         {
             List<T> list = new List<T>();
 
-            using (SqlConnection connection = DataAccessTools.DataConnector.GetConnection())
+            using (SqlConnection connection = DataConnector.GetConnection())
             {
                 SqlCommand command = new SqlCommand(procedureName, connection);
                 command.CommandType = System.Data.CommandType.StoredProcedure;
@@ -30,7 +28,7 @@ namespace DataAccessLayer
             }
         }
 
-        public static void ExecuteSpNonQuery(string procedureName, List<StoredProcedureParameters> parameters)
+        public static void ExecuteSpNonQuery(string procedureName, List<SPParam> parameters)
         {
             using (SqlConnection connection = DataConnector.GetConnection())
             {
@@ -45,10 +43,10 @@ namespace DataAccessLayer
         }
 
     }
-      
 
 
 
 
-     
+
+
 }

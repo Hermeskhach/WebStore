@@ -26,7 +26,7 @@ namespace StoreWeb
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<LayerConfig>();
-            services.AddTransient<IProductable, Product>();
+            //services.AddTransient<IProductable, Product>();
             services.AddTransient<IProductRepository, ProductRepository>();
             services.AddMvc();
         }

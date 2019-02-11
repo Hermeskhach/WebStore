@@ -1,73 +1,68 @@
 ﻿using BisnessLayer.Interfaces;
 using DataAccessLayer;
 using DataAccessLayer.DataAccessTools;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace BisnessLayer.BisnessModels
 {
-    public class Product:IProductable
+    internal class Product : DataAccessManager, IProductable
     {
         public int? Id { get; set; }
         public string Name { get; set; }
         public string Category { get; set; }
-        public decimal Price { get; set; }
+        public float Price { get; set; }
         public string Description { get; set; }
         public string PictureUri { get; set; }
 
 
         public static IEnumerable<IProductable> GetProducts()
         {
-           IEnumerable<Product> products =  DataAccessManager.ExexuteSPWithResult<Product>("GetAllProducts");
+            IEnumerable<Product> products = ExexuteSPWithResult<Product>("GetAllProducts");
             return products;
         }
 
 
-       
+
 
         public void AddProduct()
         {
-            List<StoredProcedureParameters> parameters = new List<StoredProcedureParameters>()
-        {
-            
-            new StoredProcedureParameters("@Name", this.Name),
-            new StoredProcedureParameters("@Category", this.Category),
-            new StoredProcedureParameters("@Price", this.Price),
-            new StoredProcedureParameters("@Description", this.Description),
-            new StoredProcedureParameters("@PictureUri", this.PictureUri),
-        };
+            List<SPParam> parameters = new List<SPParam>
+            {
+                new SPParam("Name", this.Name),
+                new SPParam("Category", this.Category),
+                new SPParam("Price", this.Price),
+                new SPParam("Description", this.Description),
+                new SPParam("PictureUri", this.PictureUri),
+            };
 
-            DataAccessManager.ExecuteSpNonQuery("AddProduct", parameters);
+            ExecuteSpNonQuery("AddProduct", parameters);
         }
 
 
         public void EditProduct()
         {
-            List<StoredProcedureParameters> parameters = new List<StoredProcedureParameters>()
-        {
-                new StoredProcedureParameters(@"Id", this.Id),
-            new StoredProcedureParameters("@Name", this.Name),
-            new StoredProcedureParameters("@Category", this.Category),
-            new StoredProcedureParameters("@Price", this.Price),
-            new StoredProcedureParameters("@Description", this.Description),
-            new StoredProcedureParameters("@PictureUri", this.PictureUri),
-        };
+            List<SPParam> parameters = new List<SPParam>()
+            {
+                new SPParam("Id", this.Id),
+                new SPParam("Name", this.Name),
+                new SPParam("Category", this.Category),
+                new SPParam("Price", this.Price),
+                new SPParam("Description", this.Description),
+                new SPParam("PictureUri", this.PictureUri),
+            };
 
-            DataAccessManager.ExecuteSpNonQuery("EditProduct", parameters);
+            ExecuteSpNonQuery("EditProduct", parameters);
         }
 
 
         public void DeleteProduct()
         {
-            List<StoredProcedureParameters> parameters = new List<StoredProcedureParameters>()
+            List<SPParam> parameters = new List<SPParam>()
             {
-                new StoredProcedureParameters("@Id", this.Id )
+                new SPParam("Id", this.Id )
             };
 
-            DataAccessManager.ExecuteSpNonQuery("DeleteProduct", parameters);
-
+            ExecuteSpNonQuery("DeleteProduct", parameters);
         }
     }
 }
