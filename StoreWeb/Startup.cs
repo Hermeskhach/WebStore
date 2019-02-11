@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using BisnessLayer;
 using BisnessLayer.BisnessModels;
 using BisnessLayer.Interfaces;
+using BisnessLayer.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -26,6 +27,7 @@ namespace StoreWeb
         {
             services.AddSingleton<LayerConfig>();
             services.AddTransient<IProductable, Product>();
+            services.AddTransient<IProductRepository, ProductRepository>();
             services.AddMvc();
         }
 

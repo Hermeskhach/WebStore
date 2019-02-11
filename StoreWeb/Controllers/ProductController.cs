@@ -12,7 +12,12 @@ namespace StoreWeb.Controllers
     public class ProductController : Controller
     {
 
-        private IEnumerable<IProductable> products;
+        private IProductRepository repository;
+
+        public ProductController(IProductRepository repo)
+        {
+            repository = repo;
+        }
 
         public IActionResult Index()
         {
@@ -21,10 +26,10 @@ namespace StoreWeb.Controllers
 
        public IActionResult ListProducts()
         {
-
-             products= ProductVm.GetProducts();
-
-            return View(products);
+            return View(new ProductVm {
+                Products=repository.Products
+                .OrderBy(p=>p.Id)
+            });
         }
 
         public IActionResult AddProduct()
@@ -43,7 +48,7 @@ namespace StoreWeb.Controllers
 
         public IActionResult EditProduct(int? productId)
         {
-            IProductable prod = products.Where(p => p.Id == productId).FirstOrDefault();
+            IProductable prod = repository.Products.Where(p => p.Id == productId).FirstOrDefault();
             return View(prod);
         }
 
