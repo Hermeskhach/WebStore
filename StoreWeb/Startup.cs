@@ -22,13 +22,15 @@ namespace StoreWeb
         public Startup(IConfiguration conf)
         {
             Configuration = conf;
+            LayerConfig config = new LayerConfig(Configuration);
         }
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<LayerConfig>();
+            
             services.AddTransient<IProductable, Product>();
             services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             services.AddMvc();
         }
 
@@ -44,14 +46,33 @@ namespace StoreWeb
             app.UseStatusCodePages();
             app.UseMvc(routes =>
             {
-                routes.MapRoute(
-                    name: "pagination",
-                    template: "Products/Page{productPage}",
-                    defaults: new { Controller = "Product", action = "ListProducts" });
+
 
                 routes.MapRoute(
-                    name: "defaults",
-                template: "{controller=Home}/{action=Index}/{id?}");
+                        name: null,
+                        template: "{category}/Page{productPage:int}",
+                        defaults: new { controller = "Product", action = "ListProducts" });
+
+                routes.MapRoute(
+                       name: null,
+                       template: "Page{productPage:int}",
+                        defaults: new { controller = "Product", action = "ListProducts", productPage = 1 });
+
+
+                routes.MapRoute(
+                    name: null,
+                    template: "{category}",
+                     defaults: new { controller = "Product", action = "ListProducts", productPage = 1 });
+
+
+                routes.MapRoute(
+                        name: null,
+                        template: "",
+                        defaults: new { controller = "Product", action = "ListProducts", productPage = 1 });
+
+
+
+                routes.MapRoute(name: null, template: "{controller}/{action}/{id?}");
             });
         }
     }

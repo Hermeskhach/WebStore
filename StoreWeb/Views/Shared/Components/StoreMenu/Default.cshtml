@@ -1,0 +1,21 @@
+﻿@model IEnumerable<ICategory>
+
+<a class="btn btn-block btn-light"
+   asp-action="ListProducts"
+   asp-controller="Product"
+   asp-route-category="">
+    Home
+</a>
+
+
+@foreach (var category in Model)
+{
+    <a  class="btn btn-block btn-light
+ @(category.Id ==ViewBag.SelectedCategory ? "btn-primary btn-dark": "btn-secondary")"
+       asp-action="ListProducts"
+       asp-controller="Product"
+       asp-route-category="@category.Id"
+       asp-route-productPage="1">
+        @category.Name
+    </a>
+}

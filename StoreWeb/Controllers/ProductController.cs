@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BisnessLayer;
 using BisnessLayer.BisnessModels;
 using BisnessLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -12,13 +13,14 @@ namespace StoreWeb.Controllers
 {
     public class ProductController : Controller
     {
-
+       
         private IProductRepository repository;
 
         public int PageSize = 1;
 
         public ProductController(IProductRepository repo)
         {
+            
             repository = repo;
         }
 
@@ -27,20 +29,22 @@ namespace StoreWeb.Controllers
             return View();
         }
 
-        public IActionResult ListProducts(int productPage=1)
+        public IActionResult ListProducts(int? category, int productPage=1)
 
         {
             return View(new ProductListView
             {
                 Products = repository.Products
-                .OrderBy(p=>p.Id)
+                .Where(p => category == null || p.CategoryId == category)
+                .OrderBy(p => p.Id)
                 .Skip((productPage - 1) * PageSize).Take(PageSize),
                 PagingInfo = new PagingInfo
                 {
                     CurrentPage = productPage,
                     ItemsPerPage = PageSize,
                     TotalItems = repository.Products.Count()
-                }
+                },
+                CurrentCategory = category
             });
         }
 

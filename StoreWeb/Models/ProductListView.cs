@@ -13,6 +13,6 @@ namespace StoreWeb.Models
 
         public IEnumerable<IProductable> Products { get; set; }
         public PagingInfo PagingInfo { get; set; }
-
+        public int? CurrentCategory { get; set; }
     }
 }

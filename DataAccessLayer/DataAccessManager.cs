@@ -28,7 +28,7 @@ namespace DataAccessLayer
             }
         }
 
-        public static void ExecuteSpNonQuery(string procedureName, List<SPParam> parameters)
+        internal protected static void ExecuteSpNonQuery(string procedureName, List<SPParam> parameters)
         {
             using (SqlConnection connection = DataConnector.GetConnection())
             {

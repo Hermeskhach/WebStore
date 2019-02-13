@@ -14,7 +14,7 @@ namespace StoreWeb.Models
         [Required]
         public string Name { get; set; }
         [Required]
-        public string Category { get; set; }
+        public int CategoryId { get; set; }
         [Required]
         public float Price { get; set; }
         [Required]
