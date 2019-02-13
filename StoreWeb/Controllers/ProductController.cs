@@ -6,6 +6,7 @@ using BisnessLayer.BisnessModels;
 using BisnessLayer.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using StoreWeb.Models;
+using StoreWeb.Models.ViewModels;
 
 namespace StoreWeb.Controllers
 {
@@ -13,6 +14,8 @@ namespace StoreWeb.Controllers
     {
 
         private IProductRepository repository;
+
+        public int PageSize = 1;
 
         public ProductController(IProductRepository repo)
         {
@@ -24,23 +27,35 @@ namespace StoreWeb.Controllers
             return View();
         }
 
-       public IActionResult ListProducts()
+        public IActionResult ListProducts(int productPage=1)
+
         {
-            return View(new ProductVm {
-                Products=repository.Products
+            return View(new ProductListView
+            {
+                Products = repository.Products
                 .OrderBy(p=>p.Id)
+                .Skip((productPage - 1) * PageSize).Take(PageSize),
+                PagingInfo = new PagingInfo
+                {
+                    CurrentPage = productPage,
+                    ItemsPerPage = PageSize,
+                    TotalItems = repository.Products.Count()
+                }
             });
         }
 
         public IActionResult AddProduct()
         {
-            return View(new Product());
+
+            return View("CreateProduct", new ProductViewModel());
         }
 
         [HttpPost]
-        public IActionResult AddProduct(Product product)
+        public IActionResult AddProduct(ProductViewModel product)
         {
-            product.AddProduct();
+            Product.AddProduct((IProductable)product);
+
+
             return RedirectToAction("ListProducts");
 
         }
@@ -48,10 +63,10 @@ namespace StoreWeb.Controllers
 
         public IActionResult EditProduct(int? productId)
         {
-            IProductable prod = repository.Products.Where(p => p.Id == productId).FirstOrDefault();
-            return View(prod);
+
+            return View();
         }
 
-        
+
     }
 }

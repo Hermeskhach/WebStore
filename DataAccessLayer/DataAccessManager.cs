@@ -36,7 +36,7 @@ namespace DataAccessLayer
                 command.CommandType = System.Data.CommandType.StoredProcedure;
                 for (int i = 0; i < parameters.Count; i++)
                 {
-                    command.Parameters.Add(parameters[i]);
+                    command.Parameters.Add(new SqlParameter( parameters[i].ParameterName, parameters[i].ParameterValue));
                 }
                 command.ExecuteNonQuery();
             }

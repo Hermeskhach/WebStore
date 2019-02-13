@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BisnessLayer.BisnessModels
 {
-    internal class Product : DataAccessManager, IProductable
+   public class Product : DataAccessManager, IProductable
     {
         public int? Id { get; set; }
         public string Name { get; set; }
@@ -15,24 +15,24 @@ namespace BisnessLayer.BisnessModels
         public string PictureUri { get; set; }
 
 
-        public static IEnumerable<IProductable> GetProducts()
+        public static IEnumerable<Product> GetProducts()
         {
             IEnumerable<Product> products = ExexuteSPWithResult<Product>("GetAllProducts");
             return products;
         }
 
 
+       
 
-
-        public void AddProduct()
+        public static void AddProduct(IProductable product)
         {
             List<SPParam> parameters = new List<SPParam>
             {
-                new SPParam("Name", this.Name),
-                new SPParam("Category", this.Category),
-                new SPParam("Price", this.Price),
-                new SPParam("Description", this.Description),
-                new SPParam("PictureUri", this.PictureUri),
+                new SPParam("name", product.Name),
+                new SPParam("category", product.Category),
+                new SPParam("price", product.Price),
+                new SPParam("description", product.Description),
+                new SPParam("pictureUri", product.PictureUri==null?"Not Specified":product.PictureUri),
             };
 
             ExecuteSpNonQuery("AddProduct", parameters);
@@ -43,12 +43,12 @@ namespace BisnessLayer.BisnessModels
         {
             List<SPParam> parameters = new List<SPParam>()
             {
-                new SPParam("Id", this.Id),
-                new SPParam("Name", this.Name),
-                new SPParam("Category", this.Category),
-                new SPParam("Price", this.Price),
-                new SPParam("Description", this.Description),
-                new SPParam("PictureUri", this.PictureUri),
+                new SPParam("id", this.Id),
+                new SPParam("name", this.Name),
+                new SPParam("category", this.Category),
+                new SPParam("drice", this.Price),
+                new SPParam("description", this.Description),
+                new SPParam("pictureUri", this.PictureUri==null?"Not Specified":PictureUri),
             };
 
             ExecuteSpNonQuery("EditProduct", parameters);

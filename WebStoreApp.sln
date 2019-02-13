@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.329
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoreWeb", "StoreWeb\StoreWeb.csproj", "{CEA9C749-57F3-4A28-BFDA-01E65EE97FB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StoreWeb", "StoreWeb\StoreWeb.csproj", "{CEA9C749-57F3-4A28-BFDA-01E65EE97FB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{ACE54A5F-FCEE-4DFB-B3DB-8C127B537F45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataAccessLayer", "DataAccessLayer\DataAccessLayer.csproj", "{ACE54A5F-FCEE-4DFB-B3DB-8C127B537F45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BisnessLayer", "BisnessLayer\BisnessLayer.csproj", "{CBB40B70-872D-4322-8DBC-F3E8E9A02FBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BisnessLayer", "BisnessLayer\BisnessLayer.csproj", "{CBB40B70-872D-4322-8DBC-F3E8E9A02FBC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
