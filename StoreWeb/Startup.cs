@@ -46,8 +46,6 @@ namespace StoreWeb
             app.UseStatusCodePages();
             app.UseMvc(routes =>
             {
-
-
                 routes.MapRoute(
                         name: null,
                         template: "{category}/Page{productPage:int}",
@@ -59,10 +57,10 @@ namespace StoreWeb
                         defaults: new { controller = "Product", action = "ListProducts", productPage = 1 });
 
 
-                routes.MapRoute(
-                    name: null,
-                    template: "{category}",
-                     defaults: new { controller = "Product", action = "ListProducts", productPage = 1 });
+                //routes.MapRoute(
+                //    name: null,
+                //    template: "{category}",
+                //     defaults: new { controller = "Product", action = "ListProducts", productPage = 1 });
 
 
                 routes.MapRoute(

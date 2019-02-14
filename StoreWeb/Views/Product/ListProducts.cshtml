@@ -3,10 +3,10 @@
 
 @foreach (var p in Model.Products)
 {
-  @Html.Partial("ProductInfo", p)
+  <partial name="ProductInfo" model="@p"/>
 
 }
-    <div page-model="@Model.PagingInfo" page-action="ListProducts" page-classes-enabled="true"
+    <div page-model="@Model.PagingInfo" page-action="ListProducts" page-class-enabled="true"
          page-class="btn" page-class-normal="btn-secondary"
          page-class-selected="btn-primary" page-url-category="@Model.CurrentCategory"
          class="btn-group pull-right m-1">

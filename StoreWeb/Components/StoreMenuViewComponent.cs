@@ -18,8 +18,25 @@ namespace StoreWeb.Components
 
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedCategory =Convert.ToInt32( RouteData?.Values["category"]);
+            var data = RouteData?.Values["category"];
+            int number;
+            if (data != null)
+            {
+                bool success = Int32.TryParse(data.ToString(), out number);
+                if (success)
+                {
+                    ViewBag.SelectedCategory = number;
+                }
+                else
+                {
+                    ViewBag.SelectedCategory = null;
+                }
+            }
+
+
             return View(repository.Сotegories);
+            
+            
         }
     }
 }

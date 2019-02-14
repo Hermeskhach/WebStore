@@ -42,7 +42,8 @@ namespace StoreWeb.Controllers
                 {
                     CurrentPage = productPage,
                     ItemsPerPage = PageSize,
-                    TotalItems = repository.Products.Count()
+                    TotalItems = category == null ? repository.Products.Count():
+                    repository.Products.Where(p=>p.CategoryId==category).Count()
                 },
                 CurrentCategory = category
             });
@@ -57,7 +58,7 @@ namespace StoreWeb.Controllers
         [HttpPost]
         public IActionResult AddProduct(ProductViewModel product)
         {
-            Product.AddProduct((IProductable)product);
+            Product.AddProduct(product);
 
 
             return RedirectToAction("ListProducts");
